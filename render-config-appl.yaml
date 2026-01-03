@@ -1,0 +1,63 @@
+---
+- name: Render config in NetBox and push to devices
+  hosts: "platforms_ios"   # example group produced by group_by in inventory/netbox.yml
+  gather_facts: false
+  connection: network_cli
+
+  vars:
+    netbox_url: "https://netbox.example.com"
+    netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+
+  tasks:
+    - name: Look up this device in NetBox by name to get its ID
+      ansible.builtin.uri:
+        url: "{{ netbox_url }}/api/dcim/devices/?name={{ inventory_hostname | urlencode }}"
+        method: GET
+        headers:
+          Authorization: "Token {{ netbox_token }}"
+          Accept: "application/json"
+        return_content: true
+        validate_certs: true
+      register: nb_device_lookup
+      delegate_to: localhost
+
+    - name: Fail if device not found in NetBox
+      ansible.builtin.fail:
+        msg: "Device {{ inventory_hostname }} not found in NetBox."
+      when: nb_device_lookup.json.count | int == 0
+      delegate_to: localhost
+
+    - name: Set NetBox device ID fact
+      ansible.builtin.set_fact:
+        netbox_device_id: "{{ nb_device_lookup.json.results[0].id }}"
+
+    - name: Render device config via NetBox
+      ansible.builtin.uri:
+        url: "{{ netbox_url }}/api/dcim/devices/{{ netbox_device_id }}/render-config/"
+        method: POST
+        headers:
+          Authorization: "Token {{ netbox_token }}"
+          Accept: "application/json"
+          Content-Type: "application/json"
+        body_format: json
+        body: {}   # optional: pass extra context overrides here
+        return_content: true
+        validate_certs: true
+      register: nb_render
+      delegate_to: localhost
+
+    - name: Extract rendered config text
+      ansible.builtin.set_fact:
+        rendered_config: "{{ nb_render.json.content | default(nb_render.content) }}"
+
+    - name: Write rendered config to a local temp file (controller)
+      ansible.builtin.copy:
+        content: "{{ rendered_config }}"
+        dest: "/tmp/{{ inventory_hostname }}.cfg"
+        mode: "0600"
+      delegate_to: localhost
+
+    - name: Push rendered config to Cisco IOS
+      cisco.ios.ios_config:
+        src: "/tmp/{{ inventory_hostname }}.cfg"
+        save_when: modified

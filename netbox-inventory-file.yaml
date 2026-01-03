@@ -1,0 +1,11 @@
+plugin: netbox.netbox.nb_inventory
+api_endpoint: https://netbox.example.com
+token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+
+query_filters:
+  - status: active
+
+group_by:
+  - sites
+  - device_roles
+  - tags
