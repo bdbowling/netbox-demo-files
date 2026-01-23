@@ -1,5 +1,7 @@
 brew install jq
 
+export NETBOX_TOKEN="PASTE_REAL_TOKEN_HERE"
+
 curl -H "Authorization: Token $NETBOX_TOKEN" \
      https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/ \
   | jq
