@@ -1,0 +1,6 @@
+vid	name	site	group	tenant	status	role
+10	DATA	FS-Florence	Flotown Group	Flotown Sound	active	Access - Data
+20	VOICE	FS-Florence	Flotown Group	Flotown Sound	active	Access - Voice
+30	B_WIFI	FS-Florence	Flotown Group	Flotown Sound	active	Access - Wireless
+40	G_WIFI	FS-Florence	Flotown Group	Flotown Sound	active	Testing
+50	NETMAN	FS-Florence	Flotown Group	Flotown Sound	active	Management
