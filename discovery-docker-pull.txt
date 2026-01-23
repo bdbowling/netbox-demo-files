@@ -1,0 +1,1 @@
+docker run --rm --env-file .env -e ORB_LOG_LEVEL=debug -v "$(pwd)":/opt/orb/ netboxlabs/orb-agent:latest run -c /opt/orb/arista.discovery.yaml
