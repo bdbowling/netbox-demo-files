@@ -1,0 +1,153 @@
+NetBox Change Log API Cheat Sheet
+================================
+
+Prerequisites
+-------------
+- NetBox Cloud
+- Valid NetBox API token
+- jq installed (for human-readable output)
+
+Environment variables (recommended)
+-----------------------------------
+export NETBOX_TOKEN="YOUR_REAL_API_TOKEN"
+export BASE_URL="https://pvkw7788.cloud.netboxapp.com"
+
+------------------------------------------------------------
+1. API root sanity check
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  $BASE_URL/api/
+
+------------------------------------------------------------
+2. Raw change log (latest 100)
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?ordering=-time&limit=100"
+
+------------------------------------------------------------
+3. Human-readable: who changed what
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?ordering=-time&limit=100" \
+| jq -r '.results[] |
+  "\(.time) | \(.user.username) | \(.action.value) | \(.changed_object_type) | \(.object_repr)"'
+
+------------------------------------------------------------
+4. Changes today (UTC)
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?time__gte=$(date -u +%F)T00:00:00Z&ordering=-time&limit=1000"
+
+------------------------------------------------------------
+5. Changes in the last 24 hours (Linux)
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?time__gte=$(date -u -d '24 hours ago' +%FT%TZ)&ordering=-time"
+
+(macOS alternative)
+date -u -v-24H +%FT%TZ
+
+------------------------------------------------------------
+6. Changes by a specific user
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?user__username=admin&ordering=-time"
+
+------------------------------------------------------------
+7. Changes by object type
+------------------------------------------------------------
+# Devices
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?changed_object_type=dcim.device&ordering=-time"
+
+# IP addresses
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?changed_object_type=ipam.ipaddress&ordering=-time"
+
+------------------------------------------------------------
+8. Changes for a specific object ID
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?changed_object_id=1234"
+
+------------------------------------------------------------
+9. Only creates / updates / deletes
+------------------------------------------------------------
+# action = create | update | delete
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?action=update&ordering=-time"
+
+------------------------------------------------------------
+10. Group changes by request_id (single user action)
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?ordering=-time&limit=200" \
+| jq -r '
+  group_by(.request_id)[] |
+  "REQUEST: \((.[0].request_id)) USER: \((.[0].user.username))\n" +
+  (map("  - \(.time) \(.action.value) \(.changed_object_type) \(.object_repr)") | join("\n"))'
+
+------------------------------------------------------------
+11. Field-level diffs (what actually changed)
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?ordering=-time&limit=50" \
+| jq '
+  .results[] |
+  {
+    time,
+    user: .user.username,
+    action: .action.value,
+    object: .object_repr,
+    changed_fields:
+      (
+        ((.prechange_data // {}) | keys) +
+        ((.postchange_data // {}) | keys)
+      )
+      | unique
+      | map(select((.prechange_data[.] // null) != (.postchange_data[.] // null)))
+  }'
+
+------------------------------------------------------------
+12. Export change log to CSV
+------------------------------------------------------------
+curl -s \
+  -H "Authorization: Token $NETBOX_TOKEN" \
+  -H "Accept: application/json" \
+  "$BASE_URL/api/core/object-changes/?ordering=-time&limit=1000" \
+| jq -r '
+  .results[] |
+  [.time, .user.username, .action.value, .changed_object_type, .object_repr] |
+  @csv'
+
+------------------------------------------------------------
+Notes
+------------------------------------------------------------
+- Times are UTC
+- Endpoint is read-only
+- API tokens inherit user permissions
+- request_id is useful for audits and grouping changes
