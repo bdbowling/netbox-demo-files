@@ -1,0 +1,29 @@
+orb:
+  config_manager:
+    active: local
+  backends:
+    device_discovery:
+    common:
+      diode:
+        target: grpcs://pvkw7788.cloud.netboxapp.com/diode
+        client_id: ${DIODE_CLIENT_ID}
+        client_secret: ${DIODE_CLIENT_SECRET}
+        agent_name: orb1
+        timeout: 10
+  policies:
+    device_discovery:
+      arista_lab:
+        config:
+          schedule:  "* * * * *"   # every minute for testing
+          defaults:
+            site: Royal Crest
+            role: "Access"
+        scope:
+          - driver: eos
+            hostname: 10.0.0.100
+            username: admin
+            password: ${ARISTA_SSH_PASS}
+            optional_args:
+              transport: ssh    # explicit for EOS eAPI
+              port: 22
+              timeout: 30
