@@ -10,7 +10,7 @@ Prerequisites
 Environment variables (recommended)
 -----------------------------------
 export NETBOX_TOKEN="YOUR_REAL_API_TOKEN"
-export BASE_URL="https://pvkw7788.cloud.netboxapp.com"
+export BASE_URL="https://yourinstance.cloud.netboxapp.com"
 
 ------------------------------------------------------------
 1. API root sanity check

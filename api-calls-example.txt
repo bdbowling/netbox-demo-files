@@ -3,21 +3,21 @@ brew install jq
 export NETBOX_TOKEN="PASTE_REAL_TOKEN_HERE"
 
 curl -H "Authorization: Token $NETBOX_TOKEN" \
-     https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/ \
+     https://yourinstance.cloud.netboxapp.com/api/dcim/devices/ \
   | jq
 
 ------
 
 #Bonus: show just the actual devices
   curl -H "Authorization: Token $NETBOX_TOKEN" \
-     https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/ \
+     https://yourinstance.cloud.netboxapp.com/api/dcim/devices/ \
   | jq '.results'
 
 -----
 
 #macOS ships with Python, so this works out of the box:
   curl -H "Authorization: Token $NETBOX_TOKEN" \
-     https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/ \
+     https://yourinstance.cloud.netboxapp.com/api/dcim/devices/ \
   | python3 -m json.tool
 
 -----
@@ -27,7 +27,7 @@ export NETBOX_TOKEN="PASTE_REAL_TOKEN_HERE"
 
 curl -H "Authorization: Token $NETBOX_TOKEN" \
      -H "Accept: application/json" \
-     https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/ \
+     https://yourinstance.cloud.netboxapp.com/api/dcim/devices/ \
   | python3 -m json.tool
 
 -----
@@ -36,7 +36,7 @@ curl -H "Authorization: Token $NETBOX_TOKEN" \
 export NETBOX_TOKEN="PASTE_REAL_TOKEN_HERE"
 
 curl -H "Authorization: Token $NETBOX_TOKEN" \
-     https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/ \
+     https://yourinstance.cloud.netboxapp.com/api/dcim/devices/ \
   | python3 -m json.tool \
   | sed -n '/"results": \[/,/\]/p'
 #(That keeps things readable even without jq.)
@@ -47,7 +47,7 @@ curl -H "Authorization: Token $NETBOX_TOKEN" \
 export NETBOX_TOKEN="PASTE_REAL_TOKEN_HERE"
 
 curl -H "Authorization: Token $NETBOX_TOKEN" \
-     https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/ \
+     https://yourinstance.cloud.netboxapp.com/api/dcim/devices/ \
   | jq -r '.results[].name'
 
 -----
@@ -56,7 +56,7 @@ curl -H "Authorization: Token $NETBOX_TOKEN" \
 export NETBOX_TOKEN="PASTE_REAL_TOKEN_HERE"
 
 curl -H "Authorization: Token $NETBOX_TOKEN" \
-     https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/ \
+     https://yourinstance.cloud.netboxapp.com/api/dcim/devices/ \
   | jq '.results[] | {name: .name, role: .role.name}'
 
 -----
@@ -65,7 +65,7 @@ curl -H "Authorization: Token $NETBOX_TOKEN" \
 export NETBOX_TOKEN="PASTE_REAL_TOKEN_HERE"
 
 curl -H "Authorization: Token $NETBOX_TOKEN" \
-     https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/ \
+     https://yourinstance.cloud.netboxapp.com/api/dcim/devices/ \
   | jq '.results[] | {name: .name, site: .site.name, role: .role.name}'
 
 -----
@@ -76,5 +76,5 @@ curl -H "Authorization: Token $NETBOX_TOKEN" \
 export NETBOX_TOKEN="PASTE_REAL_TOKEN_HERE"
 
 curl -H "Authorization: Token $NETBOX_TOKEN" \
-     "https://pvkw7788.cloud.netboxapp.com/api/dcim/devices/?site=nyc" \
+     "https://yourinstance.cloud.netboxapp.com/api/dcim/devices/?site=nyc" \
   | jq '.results[] | {name: .name, site: .site.name}'

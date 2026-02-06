@@ -21,7 +21,7 @@
 set -euo pipefail
 
 : "${NETBOX_TOKEN:?NETBOX_TOKEN is required. Export it first (see script header).}"
-BASE_URL="${BASE_URL:-https://pvkw7788.cloud.netboxapp.com}"
+BASE_URL="${BASE_URL:-https://yourinstance.cloud.netboxapp.com}"
 
 AUTH_HEADERS=(
   -H "Authorization: Token ${NETBOX_TOKEN}"
@@ -129,7 +129,7 @@ netbox-changelog.sh (v1.0.0)
 Required env vars:
   export NETBOX_TOKEN="..."
 Optional:
-  export BASE_URL="https://pvkw7788.cloud.netboxapp.com"
+  export BASE_URL="https://yourinstance.cloud.netboxapp.com"
 
 Commands:
   latest [N]          Pretty JSON of latest N changes (default 100)

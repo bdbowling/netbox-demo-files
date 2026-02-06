@@ -1,7 +1,7 @@
 # NetBox Change Log API Cheat Sheet (v1.0.0)
 
 Last updated: 2026-01-28  
-Instance: `https://pvkw7788.cloud.netboxapp.com`
+Instance: `https://yourinstance.netboxapp.com`
 
 > This cheat sheet focuses on the **global change log** endpoint:
 >
@@ -19,7 +19,7 @@ Export these once per shell session (recommended):
 
 ```bash
 export NETBOX_TOKEN="YOUR_REAL_API_TOKEN"
-export BASE_URL="https://pvkw7788.cloud.netboxapp.com"
+export BASE_URL="https://yourinstance.cloud.netboxapp.com"
 ```
 
 ---
