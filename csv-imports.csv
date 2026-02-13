@@ -1,0 +1,106 @@
+# Devices
+role,manufacturer,device_type,status,site,name,rack,position,face
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server02,rack1,31,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server03,rack1,32,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server04,rack1,33,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server05,rack1,34,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server06,rack1,35,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server07,rack1,36,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server08,rack1,37,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server09,rack1,38,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server10,rack1,39,front
+
+# Modules
+device,module_bay,module_type,status
+server02,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server02,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server03,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server03,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server04,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server04,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server05,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server05,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server06,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server06,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server07,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server07,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server08,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server08,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server09,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server09,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server10,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server10,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+
+# Cables
+side_a_device,side_a_type,side_a_name,side_b_device,side_b_type,side_b_name,side_a_site,side_b_site,type
+server02,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 2,datacenter,datacenter,power
+server02,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 2,datacenter,datacenter,power
+server03,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 3,datacenter,datacenter,power
+server03,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 3,datacenter,datacenter,power
+server04,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 4,datacenter,datacenter,power
+server04,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 4,datacenter,datacenter,power
+server05,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 5,datacenter,datacenter,power
+server05,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 5,datacenter,datacenter,power
+server06,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 6,datacenter,datacenter,power
+server06,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 6,datacenter,datacenter,power
+server07,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 7,datacenter,datacenter,power
+server07,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 7,datacenter,datacenter,power
+server08,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 8,datacenter,datacenter,power
+server08,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 8,datacenter,datacenter,power
+server09,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 9,datacenter,datacenter,power
+server09,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 9,datacenter,datacenter,power
+server10,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 10,datacenter,datacenter,power
+server10,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 10,datacenter,datacenter,power
+
+======== 8 - 16 ============
+
+
+# Devices
+role,manufacturer,device_type,status,site,name,rack,position,face
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server09,rack1,28,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server10,rack1,27,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server11,rack1,26,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server12,rack1,25,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server13,rack1,24,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server14,rack1,23,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server15,rack1,22,front
+Server,HPE,ProLiant DL360 Gen11,active,datacenter,server16,rack1,21,front
+
+
+# Modules
+device,module_bay,module_type,status
+server09,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server09,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server10,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server10,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server11,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server11,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server12,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server12,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server13,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server13,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server14,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server14,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server15,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server15,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+server16,PSU1,HPE PSU 800W Flex Slot Power Supply,active
+server16,PSU2,HPE PSU 800W Flex Slot Power Supply,active
+
+# Cables
+side_a_device,side_a_type,side_a_name,side_b_device,side_b_type,side_b_name,side_a_site,side_b_site,type
+server09,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 9,datacenter,datacenter,power
+server09,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 9,datacenter,datacenter,power
+server10,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 10,datacenter,datacenter,power
+server10,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 10,datacenter,datacenter,power
+server11,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 11,datacenter,datacenter,power
+server11,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 11,datacenter,datacenter,power
+server12,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 12,datacenter,datacenter,power
+server12,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 12,datacenter,datacenter,power
+server13,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 13,datacenter,datacenter,power
+server13,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 13,datacenter,datacenter,power
+server14,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 14,datacenter,datacenter,power
+server14,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 14,datacenter,datacenter,power
+server15,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 15,datacenter,datacenter,power
+server15,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 15,datacenter,datacenter,power
+server16,dcim.powerport,Power PSU1,pdu1,dcim.poweroutlet,Power Outlet 16,datacenter,datacenter,power
+server16,dcim.powerport,Power PSU2,pdu2,dcim.poweroutlet,Power Outlet 16,datacenter,datacenter,power
