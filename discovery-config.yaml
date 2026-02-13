@@ -1,0 +1,42 @@
+---
+# NetBox Discovery Config
+global:
+  diode_server_url: "${DIODE_SERVER_URL}"
+  diode_api_key: "${DIODE_API_KEY}"
+  log_level: "${LOG_LEVEL}"
+  discovery_interval: ${DISCOVERY_INTERVAL}
+  timeout: 300
+  max_workers: 10
+
+network_discovery:
+  enabled: true
+  networks:
+    - name: ""
+      cidr: "10.0.0.0/24"
+      site: ""
+      vlan_id: 100
+      scan_methods: [icmp_ping, arp_scan]
+
+device_discovery:
+  enabled: true
+  device_groups:
+    - name: ""
+      platform: "arista-eos"
+      discovery_methods: [ssh, snmp]
+      devices:
+        - hostname: ""
+          ip_address: ""
+        - hostname: "RC-EI-SW01"
+          ip_address: "10.0.0.100"
+      ssh_credentials:
+        username: "${CISCO_USERNAME}"
+        password: "${CISCO_PASSWORD}"
+        enable_password: "${CISCO_ENABLE_PASSWORD}"
+
+ip_discovery:
+  enabled: true
+  ranges:
+    - name: "range1"
+      start_ip: "10.0.0.1"
+      end_ip: "10.0.0.254"
+      site: "HQ"
